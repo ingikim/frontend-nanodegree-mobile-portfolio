@@ -1,23 +1,3 @@
-/*
-Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
-jank-free at 60 frames per second.
-
-There are two major issues in this code that lead to sub-60fps performance. Can
-you spot and fix both?
-
-
-Built into the code, you'll find a few instances of the User Timing API
-(window.performance), which will be console.log()ing frame rate data into the
-browser console. To learn more about User Timing API, check out:
-http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
-
-Creator:
-Cameron Pittman, Udacity Course Developer
-cameron *at* udacity *dot* com
-*/
-
-// As you may have realized, this website randomly generates pizzas.
-// Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
   "Pepperoni",
@@ -450,6 +430,7 @@ var resizePizzas = function(size) {
 
 
   // Iterates through pizza elements on the page and changes their widths
+  // Takes some variables out of for loop
   function changePizzaSizes(size) {
     var randPizCont = document.querySelectorAll(".randomPizzaContainer");
     var dx = determineDx(randPizCont[1], size);
@@ -458,18 +439,6 @@ var resizePizzas = function(size) {
       randPizCont[i].style.width = newwidth;
     }
   }
-
-
-  // // Iterates through pizza elements on the page and changes their widths
-  // function changePizzaSizes(size) {
-  //   for (var i = 0; i < 1; i++) {
-  //     var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-  //     var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-  //     for (var j = 0; j < document.querySelectorAll(".randomPizzaContainer").length; j++) {
-  //       document.querySelectorAll(".randomPizzaContainer")[j].style.width = newwidth;
-  //     }
-  //   }
-  // }
 
   changePizzaSizes(size);
 
@@ -511,11 +480,8 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
-// Takes out from the loop because it doens't change
-// var items = document.querySelectorAll('.mover'),
 var latestKnownScrollY = 0;
 var ticking = false;
-
 
 // Callback for our scroll event -just keeps track of the last scroll value
 function onScroll() {
@@ -537,9 +503,11 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var items = document.querySelectorAll('.mover');
+  //Takes out of for loop
   var p = latestKnownScrollY / 1250;
   ticking = false;
 
+  //Optimizes with transform3d
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(p + (i % 5));
     items[i].style.transform = 'translateX(' + (100 * phase) + 'px)'; 
@@ -556,9 +524,12 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
+// Optimizes with new scroll tracer
 window.addEventListener('scroll', onScroll, false);
 
+
 // Generates the sliding pizzas when the page loads.
+// Optimizes with appropriate image size and rAF
 document.addEventListener('DOMContentLoaded', window.requestAnimationFrame(function() {
   var cols = 8;
   var s = 256;
