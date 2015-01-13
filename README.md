@@ -5,7 +5,7 @@ Website Optimization for the project of Website Performance Optimization course 
 Website Performance Optimization course at Udacity: https://www.udacity.com/course/ud884
 
 ### How to run
-Simply follow this [link](http://ingikim.github.io/frontend-nanodegree-mobile-portfolio/views/pizza.html) on Github Pages.
+Simply follow this [link](http://ingikim.github.io/frontend-nanodegree-mobile-portfolio) on Github Pages.
 
 ### Sources
 [Why Moving Elements With Translate() Is Better Than Pos:abs Top/left](http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/)
